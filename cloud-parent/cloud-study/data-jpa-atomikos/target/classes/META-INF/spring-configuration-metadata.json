@@ -1,0 +1,141 @@
+{
+  "groups": [
+    {
+      "name": "spring.jta.atomikos.datasource.mysql.xa-properties",
+      "type": "cn.lianxf.cloud.jpa.config.MysqlProperties",
+      "sourceType": "cn.lianxf.cloud.jpa.config.MysqlProperties"
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle.xa-properties",
+      "type": "cn.lianxf.cloud.jpa.config.OracleProperties",
+      "sourceType": "cn.lianxf.cloud.jpa.config.OracleProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.jta.atomikos.datasource.mysql.xa-properties.borrow-connection-timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.MysqlProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.mysql.xa-properties.login-timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.MysqlProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.mysql.xa-properties.maintenance-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.MysqlProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.mysql.xa-properties.max-idle-time",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.MysqlProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.mysql.xa-properties.max-lifetime",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.MysqlProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.mysql.xa-properties.max-pool-size",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.MysqlProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.mysql.xa-properties.min-pool-size",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.MysqlProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.mysql.xa-properties.password",
+      "type": "java.lang.String",
+      "sourceType": "cn.lianxf.cloud.jpa.config.MysqlProperties"
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.mysql.xa-properties.test-query",
+      "type": "java.lang.String",
+      "sourceType": "cn.lianxf.cloud.jpa.config.MysqlProperties"
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.mysql.xa-properties.url",
+      "type": "java.lang.String",
+      "sourceType": "cn.lianxf.cloud.jpa.config.MysqlProperties"
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.mysql.xa-properties.username",
+      "type": "java.lang.String",
+      "sourceType": "cn.lianxf.cloud.jpa.config.MysqlProperties"
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle.xa-properties.borrow-connection-timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.OracleProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle.xa-properties.login-timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.OracleProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle.xa-properties.maintenance-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.OracleProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle.xa-properties.max-idle-time",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.OracleProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle.xa-properties.max-lifetime",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.OracleProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle.xa-properties.max-pool-size",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.OracleProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle.xa-properties.min-pool-size",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.lianxf.cloud.jpa.config.OracleProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle.xa-properties.password",
+      "type": "java.lang.String",
+      "sourceType": "cn.lianxf.cloud.jpa.config.OracleProperties"
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle.xa-properties.test-query",
+      "type": "java.lang.String",
+      "sourceType": "cn.lianxf.cloud.jpa.config.OracleProperties"
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle.xa-properties.url",
+      "type": "java.lang.String",
+      "sourceType": "cn.lianxf.cloud.jpa.config.OracleProperties"
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle.xa-properties.username",
+      "type": "java.lang.String",
+      "sourceType": "cn.lianxf.cloud.jpa.config.OracleProperties"
+    }
+  ],
+  "hints": []
+}

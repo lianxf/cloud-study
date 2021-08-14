@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lianxf.cloud.mapper.oracle.SoftProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.lianxf.cloud.entity.oracle.SoftProduct">
+        <id column="ID" property="id" />
+        <result column="FLOW_INST_ID" property="flowInstId" />
+        <result column="MATERIAL_CODE" property="materialCode" />
+        <result column="ORDER_MODEL" property="orderModel" />
+        <result column="PRODUCT_NAME" property="productName" />
+        <result column="PRODUCT_VERSION" property="productVersion" />
+        <result column="ACTIVITY_ID" property="activityId" />
+        <result column="SALE_MODULES" property="saleModules" typeHandler="cn.lianxf.cloud.handler.SoftSaleModuleHandler"/>
+    </resultMap>
+    <insert id="insertProduct">
+        insert into T_SOFT_PRODUCT(ID, FLOW_INST_ID, MATERIAL_CODE, ORDER_MODEL, PRODUCT_NAME,
+        PRODUCT_VERSION, ACTIVITY_ID, SALE_MODULES)
+        values (
+                #{id, jdbcType=VARCHAR},
+                #{flowInstId, jdbcType=VARCHAR},
+                #{materialCode, jdbcType=VARCHAR},
+                #{orderModel, jdbcType=VARCHAR},
+                #{productName, jdbcType=VARCHAR},
+                #{productVersion, jdbcType=VARCHAR},
+                #{activityId, jdbcType=VARCHAR},
+                #{saleModules, jdbcType=CLOB, typeHandler=cn.lianxf.cloud.handler.SoftSaleModuleHandler}
+               )
+    </insert>
+    <select id="findByFlowInstId" resultMap="BaseResultMap">
+        select * from T_SOFT_PRODUCT WHERE FLOW_INST_ID = #{flowInstId}
+    </select>
+
+</mapper>

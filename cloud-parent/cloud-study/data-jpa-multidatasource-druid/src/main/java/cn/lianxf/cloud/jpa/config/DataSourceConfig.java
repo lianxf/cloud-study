@@ -1,0 +1,33 @@
+package cn.lianxf.cloud.jpa.config;
+
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+import javax.sql.DataSource;
+
+/**
+ * @className DataSourceConfig
+ * @description DbConfig
+ * @date 2021/8/14 下午7:52
+ * @author little
+ * @version 1.0.0
+ */
+@Configuration
+public class DataSourceConfig {
+
+    @Primary
+    @Bean(name = "oracleDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.druid.oracle")
+    public DataSource oracleDataSource() {
+        return DruidDataSourceBuilder.create().build();
+    }
+
+    @Bean(name = "mysqlDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.druid.mysql")
+    public DataSource mysqlDataSource() {
+        return DruidDataSourceBuilder.create().build();
+    }
+}

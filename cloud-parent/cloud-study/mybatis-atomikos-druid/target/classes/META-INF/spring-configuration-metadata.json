@@ -1,0 +1,16 @@
+{
+  "groups": [
+    {
+      "name": "spring.datasource.mysql",
+      "type": "cn.lianxf.cloud.config.MysqlDataSourceProperties",
+      "sourceType": "cn.lianxf.cloud.config.MysqlDataSourceProperties"
+    },
+    {
+      "name": "spring.datasource.oracle",
+      "type": "cn.lianxf.cloud.config.OracleDataSourceProperties",
+      "sourceType": "cn.lianxf.cloud.config.OracleDataSourceProperties"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

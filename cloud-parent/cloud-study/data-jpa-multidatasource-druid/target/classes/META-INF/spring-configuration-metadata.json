@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "name": "spring.datasource.druid.mysql",
+      "type": "javax.sql.DataSource",
+      "sourceType": "cn.lianxf.cloud.jpa.config.DataSourceConfig",
+      "sourceMethod": "mysqlDataSource()"
+    },
+    {
+      "name": "spring.datasource.druid.oracle",
+      "type": "javax.sql.DataSource",
+      "sourceType": "cn.lianxf.cloud.jpa.config.DataSourceConfig",
+      "sourceMethod": "oracleDataSource()"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lianxf.cloud.mapper.TSoftProductMapper">
+
+    <select id="findSaleModulesBySoftProductId" resultType="cn.lianxf.cloud.domain.entity.TSoftSaleModule">
+
+    </select>
+    <insert id="updateSoftProductList">
+        delete from T
+        <if test="productList != null and productList.size() > 0">
+            <foreach collection="productList" index="index" item="product" open=""
+        </if>
+    </insert>
+
+</mapper>

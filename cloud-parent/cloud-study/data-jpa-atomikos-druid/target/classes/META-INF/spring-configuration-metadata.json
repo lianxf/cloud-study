@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "name": "spring.jta.atomikos.datasource.mysql",
+      "type": "javax.sql.DataSource",
+      "sourceType": "cn.lianxf.cloud.jpa.config.DataSourceConfig",
+      "sourceMethod": "mysqlDataSource()"
+    },
+    {
+      "name": "spring.jta.atomikos.datasource.oracle",
+      "type": "javax.sql.DataSource",
+      "sourceType": "cn.lianxf.cloud.jpa.config.DataSourceConfig",
+      "sourceMethod": "oracleDataSource()"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

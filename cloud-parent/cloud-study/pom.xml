@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>cloud-parent</artifactId>
+        <groupId>cn.lianxf.cloud</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>cloud-study</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>swagger-config-overwrite</module>
+        <module>data-jpa</module>
+        <module>boot-mybatisPlus</module>
+        <module>mp-generator</module>
+        <module>mybatis-plus-multidatasource</module>
+        <module>mybatis-atomikos</module>
+        <module>data-jpa-multidatasource</module>
+        <module>mybatis-atomikos-druid</module>
+        <module>data-jpa-multidatasource-druid</module>
+        <module>mybatis-plus-multidatasource-druid</module>
+        <module>data-jpa-atomikos</module>
+        <module>data-jpa-atomikos-druid</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.lianxf.cloud</groupId>
+            <artifactId>cloud-common</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
