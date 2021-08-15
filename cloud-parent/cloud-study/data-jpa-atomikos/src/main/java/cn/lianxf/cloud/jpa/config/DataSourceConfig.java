@@ -1,5 +1,6 @@
 package cn.lianxf.cloud.jpa.config;
 
+import com.alibaba.druid.pool.xa.DruidXADataSource;
 import com.mysql.cj.jdbc.MysqlXADataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jta.atomikos.AtomikosDataSourceBean;
@@ -23,28 +24,29 @@ public class DataSourceConfig {
     @Primary
     @Bean("oracleDataSource")
     public DataSource oracleDataSource(OracleProperties properties){
-        AtomikosDataSourceBean ds = new AtomikosDataSourceBean();
-        ds.setUniqueResourceName("oracleDataSource");
-        ds.setXaDataSourceClassName("oracle.jdbc.xa.client.OracleXADataSource");
-        Properties p = new Properties();
-        p.setProperty("user" , properties.getUsername() );
-        p.setProperty("password" , properties.getPassword() );
-        p.setProperty("URL" , properties.getUrl());
-        ds.setXaProperties(p);
-        return ds;
+        DruidXADataSource druidXADataSource = new DruidXADataSource();
+        druidXADataSource.setUrl(properties.getUrl());
+        druidXADataSource.setUsername(properties.getUsername());
+        druidXADataSource.setPassword(properties.getPassword());
+        druidXADataSource.setDefaultAutoCommit(false);
+        AtomikosDataSourceBean atomikosDataSourceBean = new AtomikosDataSourceBean();
+        atomikosDataSourceBean.setXaDataSource(druidXADataSource);
+        atomikosDataSourceBean.setUniqueResourceName("oracleDataSource");
+        atomikosDataSourceBean.setPoolSize(5);
+        return atomikosDataSourceBean;
     }
 
     @Bean("mysqlDataSource")
     public DataSource mysqlDataSource(MysqlProperties properties) throws Exception{
-        AtomikosDataSourceBean ds = new AtomikosDataSourceBean();
-        ds.setUniqueResourceName("mysqlDataSource");
-        ds.setXaDataSourceClassName("com.mysql.cj.jdbc.MysqlXADataSource");
-        Properties p = new Properties();
-        p.setProperty("user" , properties.getUsername() );
-        p.setProperty("password" , properties.getPassword() );
-        p.setProperty("URL" , properties.getUrl());
-        ds.setXaProperties(p);
-        return ds;
-
+        DruidXADataSource druidXADataSource = new DruidXADataSource();
+        druidXADataSource.setUrl(properties.getUrl());
+        druidXADataSource.setUsername(properties.getUsername());
+        druidXADataSource.setPassword(properties.getPassword());
+        druidXADataSource.setDefaultAutoCommit(false);
+        AtomikosDataSourceBean atomikosDataSourceBean = new AtomikosDataSourceBean();
+        atomikosDataSourceBean.setXaDataSource(druidXADataSource);
+        atomikosDataSourceBean.setUniqueResourceName("mysqlDataSource");
+        atomikosDataSourceBean.setPoolSize(5);
+        return atomikosDataSourceBean;
     }
 }

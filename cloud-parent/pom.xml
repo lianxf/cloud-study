@@ -31,6 +31,7 @@
         <freemarker.version>2.3.28</freemarker.version>
         <mysql.version>8.0.25</mysql.version>
         <druid.version>1.2.6</druid.version>
+        <feign-okhttp3.version>11.6</feign-okhttp3.version>
     </properties>
 
     <dependencies>
@@ -123,7 +124,11 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-okhttp</artifactId>
+                <version>${feign-okhttp3.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

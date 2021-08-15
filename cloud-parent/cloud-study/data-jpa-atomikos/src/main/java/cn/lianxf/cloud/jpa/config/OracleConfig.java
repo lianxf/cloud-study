@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @className OracleConfig
@@ -27,8 +28,9 @@ import java.util.Map;
  * @version 1.0.0
  */
 @Configuration
-//@EnableTransactionManagement
+@EnableTransactionManagement
 @EnableJpaRepositories(
+        transactionManagerRef = "oracleTransactionManager",
         entityManagerFactoryRef="oracleEntityManagerFactory",
         basePackages= { "cn.lianxf.cloud.jpa.repository.oracle" })
 public class OracleConfig {
@@ -69,5 +71,15 @@ public class OracleConfig {
         jpaPreperties.setProperties(map);
         return jpaPreperties.getProperties();
     }
+
+    /**
+     * 事务管理器
+     */
+    @Primary
+    @Bean(name = "oracleTransactionManager")
+    public PlatformTransactionManager goodsTransactionManager(EntityManagerFactoryBuilder builder) {
+        return new JpaTransactionManager(Objects.requireNonNull(oracleEntityManagerFactory(builder).getObject()));
+    }
+
 
 }

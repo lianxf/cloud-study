@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: api-provider
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
+    health:
+      show-details: always

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -17,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @className MysqlConfig
@@ -26,8 +28,9 @@ import java.util.Map;
  * @version 1.0.0
  */
 @Configuration
-//@EnableTransactionManagement
+@EnableTransactionManagement
 @EnableJpaRepositories(
+        transactionManagerRef = "mysqlTransactionManager",
         entityManagerFactoryRef="mysqlEntityManagerFactory",
         basePackages= { "cn.lianxf.cloud.jpa.repository.mysql" })
 public class MysqlConfig {
@@ -65,6 +68,14 @@ public class MysqlConfig {
         map.put("hibernate.dialect", mysqlDialect);
         jpaPreperties.setProperties(map);
         return jpaPreperties.getProperties();
+    }
+
+    /**
+     * 事务管理器
+     */
+    @Bean(name = "mysqlTransactionManager")
+    public PlatformTransactionManager mysqlTransactionManager(EntityManagerFactoryBuilder builder) {
+        return new JpaTransactionManager(Objects.requireNonNull(mysqlEntityManagerFactory(builder).getObject()));
     }
 
 }

@@ -4,7 +4,10 @@ import cn.lianxf.cloud.jpa.entity.mysql.SaleModule;
 import cn.lianxf.cloud.jpa.entity.oracle.OrderModel;
 import cn.lianxf.cloud.jpa.repository.mysql.SaleModelRepository;
 import cn.lianxf.cloud.jpa.repository.oracle.OrderModelRepository;
+import cn.lianxf.cloud.jpa.service.mysql.SaleModuleService;
+import cn.lianxf.cloud.jpa.service.oracle.OrderModelSerivce;
 import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,35 +26,37 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JpaTestController {
 
-    private final OrderModelRepository orderModelRepository;
+    private final OrderModelSerivce orderModelSerivce;
 
-    private final SaleModelRepository saleModelRepository;
+    private final SaleModuleService saleModuleService;
 
+    @Transactional(rollbackFor = Exception.class,
+            transactionManager = "jtaTransactionManager")
     @GetMapping("/test")
     public String test(){
-        saleModelRepository.save(SaleModule.builder().count(1)
+        saleModuleService.save(SaleModule.builder().count(1)
                 .deleted(false).build());
-        orderModelRepository.save(OrderModel.builder()
+        orderModelSerivce.save(OrderModel.builder()
                 .deleted(false).build());
         return "ok";
     }
 
     @GetMapping("/test1")
     public String test1(){
-        orderModelRepository.save(OrderModel.builder()
+        orderModelSerivce.save(OrderModel.builder()
                 .deleted(false).build());
-        saleModelRepository.save(SaleModule.builder().count(1)
+        saleModuleService.save(SaleModule.builder().count(1)
                 .deleted(false).build());
         System.out.println(1/0);
         return "ok";
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class, transactionManager = "jtaTransactionManager")
     @GetMapping("/test2")
     public String test2(){
-        orderModelRepository.save(OrderModel.builder()
+        orderModelSerivce.save(OrderModel.builder()
                 .deleted(false).build());
-        saleModelRepository.save(SaleModule.builder().count(1)
+        saleModuleService.save(SaleModule.builder().count(1)
                 .deleted(false).build());
         System.out.println(1/0);
         return "ok";

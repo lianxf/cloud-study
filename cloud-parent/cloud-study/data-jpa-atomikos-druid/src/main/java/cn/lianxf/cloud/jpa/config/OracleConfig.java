@@ -9,13 +9,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @className OracleConfig
@@ -27,6 +30,7 @@ import java.util.Map;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
+        transactionManagerRef = "oracleTransactionManager",
         entityManagerFactoryRef="oracleEntityManagerFactory",
         basePackages= { "cn.lianxf.cloud.jpa.repository.oracle" })
 public class OracleConfig {
@@ -66,6 +70,15 @@ public class OracleConfig {
         map.put("hibernate.dialect", oracleDialect);
         jpaPreperties.setProperties(map);
         return jpaPreperties.getProperties();
+    }
+
+    /**
+     * 事务管理器
+     */
+    @Primary
+    @Bean(name = "oracleTransactionManager")
+    public PlatformTransactionManager oracleTransactionManager(EntityManagerFactoryBuilder builder) {
+        return new JpaTransactionManager(Objects.requireNonNull(oracleEntityManagerFactory(builder).getObject()));
     }
 
 }

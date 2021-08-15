@@ -24,6 +24,7 @@
         <module>mybatis-plus-multidatasource-druid</module>
         <module>data-jpa-atomikos</module>
         <module>data-jpa-atomikos-druid</module>
+        <module>discovery-consul-parent</module>
     </modules>
 
     <dependencies>

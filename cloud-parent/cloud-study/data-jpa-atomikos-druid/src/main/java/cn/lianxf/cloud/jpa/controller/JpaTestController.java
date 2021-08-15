@@ -27,6 +27,7 @@ public class JpaTestController {
 
     private final SaleModelRepository saleModelRepository;
 
+    @Transactional(transactionManager = "jtaTransactionManager", rollbackFor = Exception.class)
     @GetMapping("/test")
     public String test(){
         orderModelRepository.save(OrderModel.builder()
@@ -46,7 +47,7 @@ public class JpaTestController {
         return "ok";
     }
 
-    @Transactional
+    @Transactional(transactionManager = "jtaTransactionManager", rollbackFor = Exception.class)
     @GetMapping("/test2")
     public String test2(){
         orderModelRepository.save(OrderModel.builder()
