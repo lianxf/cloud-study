@@ -1,23 +1,20 @@
 package cn.lianxf.cloud.jpa.config;
 
+import org.hibernate.engine.transaction.jta.platform.internal.AtomikosJtaPlatform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * @className MysqlConfig
@@ -26,55 +23,45 @@ import java.util.Objects;
  * @author little
  * @version 1.0.0
  */
+@DependsOn("transactionManager")
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        transactionManagerRef = "mysqlTransactionManager",
-        entityManagerFactoryRef="mysqlEntityManagerFactory",
+        transactionManagerRef = "transactionManager",
+        entityManagerFactoryRef="mysqlEntityManager",
         basePackages= { "cn.lianxf.cloud.jpa.repository.mysql" })
 public class MysqlConfig {
 
-
-    @Autowired
-    private JpaProperties jpaPreperties;
-
-    @Value("${spring.jpa.hibernate.mysql-dialect}")
-    private String mysqlDialect;
-
     @Autowired
     @Qualifier("mysqlDataSource")
-    private DataSource dataSource;
+    private DataSource mysqlDataSource;
+
+
+    public JpaVendorAdapter mysqlJpaVendorAdapter() {
+        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+        // 显示sql
+        hibernateJpaVendorAdapter.setShowSql(true);
+        // 自动生成/更新表
+        hibernateJpaVendorAdapter.setGenerateDdl(true);
+        // 设置数据库类型
+        hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
+        return hibernateJpaVendorAdapter;
+    }
 
     @Bean(name = "mysqlEntityManager")
-    public EntityManager mysqlEntityManager(EntityManagerFactoryBuilder builder) {
-        return mysqlEntityManagerFactory(builder).getObject().createEntityManager();
-    }
+    @DependsOn("transactionManager")
+    public LocalContainerEntityManagerFactoryBean mysqlEntityManager() throws Throwable {
 
-    @Bean(name = "mysqlEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-        return builder
-                .dataSource(dataSource)
-                .properties(getVendorProperties())
-                // 设置实体类所在位置
-                .packages("cn.lianxf.cloud.jpa.entity.mysql")
-                .persistenceUnit("mysqlPersistenceUnit")
-                .build();
-    }
-
-    private Map<String, String> getVendorProperties() {
-    	// 手动设置命名策略(可选)
-        Map<String,String> map=new HashMap<>(2);
-        map.put("hibernate.dialect", mysqlDialect);
-        jpaPreperties.setProperties(map);
-        return jpaPreperties.getProperties();
-    }
-
-    /**
-     * 事务管理器
-     */
-    @Bean(name = "mysqlTransactionManager")
-    public PlatformTransactionManager mysqlTransactionManager(EntityManagerFactoryBuilder builder) {
-        return new JpaTransactionManager(Objects.requireNonNull(mysqlEntityManagerFactory(builder).getObject()));
+        HashMap<String, Object> properties = new HashMap<String, Object>();
+        properties.put("hibernate.transaction.jta.platform", AtomikosJtaPlatform.class.getName());
+        properties.put("javax.persistence.transactionType", "JTA");
+        LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
+        entityManager.setJtaDataSource(mysqlDataSource);
+        entityManager.setJpaVendorAdapter(mysqlJpaVendorAdapter());
+        entityManager.setPackagesToScan("cn.lianxf.cloud.jpa.entity.mysql");
+        entityManager.setPersistenceUnitName("mysqlPersistenceUnit");
+        entityManager.setJpaPropertyMap(properties);
+        return entityManager;
     }
 
 }

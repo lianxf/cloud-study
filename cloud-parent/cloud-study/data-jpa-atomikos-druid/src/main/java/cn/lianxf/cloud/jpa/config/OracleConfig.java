@@ -1,24 +1,25 @@
 package cn.lianxf.cloud.jpa.config;
 
+import oracle.jdbc.xa.client.OracleXADataSource;
+import org.hibernate.engine.transaction.jta.platform.internal.AtomikosJtaPlatform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jta.atomikos.AtomikosDataSourceBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * @className OracleConfig
@@ -27,58 +28,45 @@ import java.util.Objects;
  * @author little
  * @version 1.0.0
  */
+@DependsOn("transactionManager")
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        transactionManagerRef = "oracleTransactionManager",
-        entityManagerFactoryRef="oracleEntityManagerFactory",
+        transactionManagerRef = "transactionManager",
+        entityManagerFactoryRef="oracleEntityManager",
         basePackages= { "cn.lianxf.cloud.jpa.repository.oracle" })
 public class OracleConfig {
 
-
     @Autowired
-    private JpaProperties jpaPreperties;
+    private DataSource oracleDataSource;
 
-    @Value("${spring.jpa.hibernate.oracle-dialect}")
-    private String oracleDialect;
-
-    @Autowired
-    @Qualifier("oracleDataSource")
-    private DataSource dataSource;
+    public JpaVendorAdapter oracleJpaVendorAdapter() {
+        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+        // 显示sql
+        hibernateJpaVendorAdapter.setShowSql(true);
+        // 自动生成/更新表
+        hibernateJpaVendorAdapter.setGenerateDdl(true);
+        // 设置数据库类型
+        hibernateJpaVendorAdapter.setDatabase(Database.ORACLE);
+        return hibernateJpaVendorAdapter;
+    }
 
     @Primary
     @Bean(name = "oracleEntityManager")
-    public EntityManager oracleEntityManager(EntityManagerFactoryBuilder builder) {
-        return oracleEntityManagerFactory(builder).getObject().createEntityManager();
+    @DependsOn("transactionManager")
+    public LocalContainerEntityManagerFactoryBean oracleEntityManager() throws Throwable {
+
+        HashMap<String, Object> properties = new HashMap<String, Object>();
+        properties.put("hibernate.transaction.jta.platform", AtomikosJtaPlatform.class.getName());
+        properties.put("javax.persistence.transactionType", "JTA");
+        LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
+        entityManager.setJtaDataSource(oracleDataSource);
+        entityManager.setJpaVendorAdapter(oracleJpaVendorAdapter());
+        entityManager.setPackagesToScan("cn.lianxf.cloud.jpa.entity.oracle");
+        entityManager.setPersistenceUnitName("oraclePersistenceUnit");
+        entityManager.setJpaPropertyMap(properties);
+        return entityManager;
     }
 
-    @Primary
-    @Bean(name = "oracleEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean oracleEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-        return builder
-                .dataSource(dataSource)
-                .properties(getVendorProperties())
-                // 设置实体类所在位置
-                .packages("cn.lianxf.cloud.jpa.entity.oracle")
-                .persistenceUnit("oraclePersistenceUnit")
-                .build();
-    }
-
-    private Map<String, String> getVendorProperties() {
-    	// 手动设置命名策略(可选)
-        Map<String,String> map=new HashMap<>(2);
-        map.put("hibernate.dialect", oracleDialect);
-        jpaPreperties.setProperties(map);
-        return jpaPreperties.getProperties();
-    }
-
-    /**
-     * 事务管理器
-     */
-    @Primary
-    @Bean(name = "oracleTransactionManager")
-    public PlatformTransactionManager oracleTransactionManager(EntityManagerFactoryBuilder builder) {
-        return new JpaTransactionManager(Objects.requireNonNull(oracleEntityManagerFactory(builder).getObject()));
-    }
 
 }

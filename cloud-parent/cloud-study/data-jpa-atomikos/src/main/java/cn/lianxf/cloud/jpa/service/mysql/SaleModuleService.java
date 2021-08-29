@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 /**
  * @className SaleModuleService
@@ -14,14 +15,21 @@ import org.springframework.transaction.annotation.Transactional;
  * @author little
  * @version 1.0.0
  */
-@Transactional(transactionManager = "mysqlTransactionManager", propagation = Propagation.NEVER)
+@Transactional(transactionManager = "mysqlTransactionManager", rollbackFor = Exception.class,
+        propagation = Propagation.NEVER)
 @Service
 public class SaleModuleService {
 
     @Autowired
     private SaleModelRepository saleModelRepository;
 
+
     public void save(SaleModule module) {
-        saleModelRepository.save(module);
+        try {
+            saleModelRepository.save(module);
+        } catch (Exception e) {
+            // 强制手动事务回滚
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
     }
 }

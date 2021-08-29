@@ -2,40 +2,24 @@ server:
   port: 8000
 spring:
   jta:
-    enabled: true
-    service: com.atomikos.icatch.standalone.UserTransactionServiceFactory
-    max-actives: 200
-    enable-logging: false
     atomikos:
       datasource:
-        oracle:
-          unique-resource-name: oracleDataSource
-          xa-data-source-class-name: oracle.jdbc.datasource.OracleXADataSource
-          xa-properties:
-            username: root
-            url: jdbc:oracle:thin:@localhost:1521:helowin
-            password: "root"
-            minPoolSize: 10
-            maxPoolSize: 30
-            borrowConnectionTimeout: 60
-            loginTimeout: 60
-            maintenanceInterval: 60
-            maxIdleTime: 60
-            testQuery: select 1
-        mysql:
-          unique-resource-name: mysqlDataSource
-          xa-data-source-class-name: com.mysql.cj.jdbc.MysqlXADataSource
-          xa-properties:
-            username: root
-            url: jdbc:mysql://localhost:3307/dev?useUnicode=true&characterEncoding=utf-8
-            password: "root"
-            minPoolSize: 10
-            maxPoolSize: 30
-            borrowConnectionTimeout: 60
-            loginTimeout: 60
-            maintenanceInterval: 60
-            maxIdleTime: 60
-            testQuery: select 1
+        max-pool-size: 20
+        borrow-connection-timeout: 60
+      connectionfactory:
+        max-pool-size: 20
+        borrow-connection-timeout: 60
+  datasource:
+    oracle:
+      username: root
+      url: jdbc:oracle:thin:@localhost:1521:helowin
+      password: root
+      driver-class-name: oracle.jdbc.OracleDriver
+    mysql:
+      username: root
+      password: root
+      url: jdbc:mysql://127.0.0.1:3306/dev
+      driver-class-name: com.mysql.jdbc.Driver
 # JPA配置
   jpa:
     show-sql: true

@@ -25,6 +25,7 @@
         <module>data-jpa-atomikos</module>
         <module>data-jpa-atomikos-druid</module>
         <module>discovery-consul-parent</module>
+        <module>data-jpa-atomikos-mysql</module>
     </modules>
 
     <dependencies>

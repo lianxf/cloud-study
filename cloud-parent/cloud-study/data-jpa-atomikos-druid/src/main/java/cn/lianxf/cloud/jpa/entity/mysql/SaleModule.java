@@ -28,10 +28,13 @@ public class SaleModule implements Serializable {
     @GeneratedValue(generator = "indentityGenerator", strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "required", length = 1)
     private Boolean required;
 
+    @Column(name = "deleted", length = 1)
     private boolean deleted;
 
+    @Column(name = "count", length = 1)
     private int count;
 
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 /**
  * @className OrderModelSerivce
@@ -14,13 +15,19 @@ import org.springframework.transaction.annotation.Transactional;
  * @author little
  * @version 1.0.0
  */
-@Transactional(transactionManager = "oracleTranscationManager", propagation = Propagation.NEVER)
+@Transactional(transactionManager = "oracleTransactionManager",
+        rollbackFor = Exception.class, propagation = Propagation.NEVER)
 @Service
 public class OrderModelSerivce {
     @Autowired
     private OrderModelRepository orderModelRepository;
 
     public void save(OrderModel model) {
-        orderModelRepository.save(model);
+        try {
+            orderModelRepository.save(model);
+        } catch (Exception e) {
+            //强制手动事务回滚
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
     }
 }
