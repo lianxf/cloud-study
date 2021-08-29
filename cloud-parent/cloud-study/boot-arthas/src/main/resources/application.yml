@@ -1,0 +1,43 @@
+arthas:
+    agent-id: ${spring.application.name}
+    tunnel-server: ws://192.168.0.120:7777/ws
+server:
+    port: 8888
+spring:
+    application:
+        name: arthas-boot
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: root
+        url: jdbc:mysql://localhost:3306/dev?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
+        username: root
+    boot:
+      admin:
+        client:
+          url: http://localhost:${server.port}
+#          username: lianxf
+#          password: 123
+#    security:
+#       user:
+#         name: lianxf
+#         password: 123
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  configuration:
+      map-underscore-to-camel-case: true
+#sentry:
+#    dsn: https://2c86789ff2c948c2acf63fd13d7b525d@o939369.ingest.sentry.io/5889326
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+logging:
+  file:
+    name: /opt/logs/arthas-boot/output-error.log
+
