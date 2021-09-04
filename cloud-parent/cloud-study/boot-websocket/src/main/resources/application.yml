@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: boot-websocket
+
+server:
+  port: 8000

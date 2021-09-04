@@ -27,6 +27,8 @@
         <module>discovery-consul-parent</module>
         <module>data-jpa-atomikos-mysql</module>
         <module>boot-arthas</module>
+        <module>guava-event</module>
+        <module>boot-websocket</module>
     </modules>
 
     <dependencies>
