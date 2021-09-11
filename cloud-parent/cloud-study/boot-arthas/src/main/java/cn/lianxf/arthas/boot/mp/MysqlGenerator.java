@@ -63,7 +63,7 @@ public class MysqlGenerator {
         PackageConfig pc = new PackageConfig();
         //pc.setModuleName(scanner("模块名"));
         pc.setParent("cn.lianxf.arthas.boot");
-        pc.setEntity("domain.entity");
+        pc.setEntity("domain.cn.lianxf.cloud.entity");
         pc.setService("service");
         pc.setServiceImpl("service.impl");
         mpg.setPackageInfo(pc);

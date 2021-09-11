@@ -94,7 +94,7 @@ public class MysqlConfig {
         LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
         entityManager.setJtaDataSource(mysqlDataSource());
         entityManager.setJpaVendorAdapter(mysqlJpaVendorAdapter());
-        entityManager.setPackagesToScan("cn.lianxf.cloud.jpa.entity.mysql");
+        entityManager.setPackagesToScan("cn.lianxf.cloud.jpa.cn.lianxf.cloud.entity.mysql");
         entityManager.setPersistenceUnitName("mysqlPersistenceUnit");
         entityManager.setJpaPropertyMap(properties);
         return entityManager;

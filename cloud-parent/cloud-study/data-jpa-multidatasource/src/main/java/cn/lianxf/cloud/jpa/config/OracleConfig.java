@@ -58,7 +58,7 @@ public class OracleConfig {
                 .dataSource(dataSource)
                 .properties(getVendorProperties())
                 // 设置实体类所在位置
-                .packages("cn.lianxf.cloud.jpa.entity.oracle")
+                .packages("cn.lianxf.cloud.jpa.cn.lianxf.cloud.entity.oracle")
                 .persistenceUnit("oraclePersistenceUnit")
                 .build();
     }

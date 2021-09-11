@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--解决idea thymeleaf 表达式模板报红波浪线-->
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Log Dir</title>
+</head>
+<body>
+<h1>Log Dir</h1>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <td>文件名</td>
+                <td>文件路径</td>
+                <td>文件大小</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="log:${logList}">
+                <td th:text="${log.fileName}"></td>
+                <td th:text="${log.filePath}"></td>
+                <td th:text="${log.fileSize}"></td>
+                <td >
+                    <span><a th:href = "'download?filePath=' + ${log.filePath}">下载</a></span>
+                    <span><a th:href = "'cat?filePath=' + ${log.filePath}">打开</a></span>
+                    <span><a th:href = "'cat2?filePath=' + ${log.filePath}">打开2</a></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

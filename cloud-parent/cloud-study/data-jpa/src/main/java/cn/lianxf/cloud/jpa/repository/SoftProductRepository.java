@@ -1,7 +1,6 @@
 package cn.lianxf.cloud.jpa.repository;
 
 import cn.lianxf.cloud.jpa.controller.vo.MaterialReleaseVO;
-import cn.lianxf.cloud.jpa.entity.MaterialRelease;
 import cn.lianxf.cloud.jpa.entity.SoftProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -9,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @className SoftProductRepository
@@ -36,7 +34,7 @@ public interface SoftProductRepository extends JpaRepository<SoftProduct, String
      * @date 下午12:31 2021/8/8
      * @param flowInstId 流程实例ID
      * @param taskId 环节定义ID
-     * @return java.util.List<cn.lianxf.cloud.jpa.entity.SoftProduct>
+     * @return java.util.List<cn.lianxf.cloud.jpa.cn.lianxf.cloud.entity.SoftProduct>
      */
     List<SoftProduct> findByFlowInstIdAndTaskId(String flowInstId, String taskId);
 

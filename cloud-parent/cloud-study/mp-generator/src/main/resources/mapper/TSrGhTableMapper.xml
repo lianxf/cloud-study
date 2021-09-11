@@ -3,7 +3,7 @@
 <mapper namespace="cn.lianxf.cloud.mapper.TSrGhTableMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="cn.lianxf.cloud.domain.entity.TSrGhTable">
+    <resultMap id="BaseResultMap" type="cn.lianxf.cloud.domain.cn.lianxf.cloud.entity.TSrGhTable">
         <id column="ID" property="id" />
         <result column="PROCESSINSTANCEID" property="processinstanceid" />
         <result column="WF_FLOWSTATUS" property="wfFlowstatus" />

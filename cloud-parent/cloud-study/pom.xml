@@ -29,6 +29,9 @@
         <module>boot-arthas</module>
         <module>guava-event</module>
         <module>boot-websocket</module>
+        <module>prometheus_grafana</module>
+        <module>spring-validate</module>
+        <module>sping-log</module>
     </modules>
 
     <dependencies>

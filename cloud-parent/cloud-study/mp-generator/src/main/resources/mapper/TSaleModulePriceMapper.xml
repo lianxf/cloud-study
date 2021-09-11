@@ -3,7 +3,7 @@
 <mapper namespace="cn.lianxf.cloud.mapper.TSaleModulePriceMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="cn.lianxf.cloud.domain.entity.SaleModulePrice">
+    <resultMap id="BaseResultMap" type="cn.lianxf.cloud.domain.cn.lianxf.cloud.entity.SaleModulePrice">
         <id column="ID" property="id" />
         <result column="CREATED_DATE" property="createdDate" />
         <result column="DELETED" property="deleted" />

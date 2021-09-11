@@ -57,7 +57,7 @@ public class SlaveConfig {
         LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
         entityManager.setJtaDataSource(slaveDataSource());
         entityManager.setJpaVendorAdapter(jpaVendorAdapter);
-        entityManager.setPackagesToScan("com.mrcoder.sbjpamultidbatomikos.entity.slave");
+        entityManager.setPackagesToScan("com.mrcoder.sbjpamultidbatomikos.cn.lianxf.cloud.entity.slave");
         entityManager.setPersistenceUnitName("slavePersistenceUnit");
         entityManager.setJpaPropertyMap(properties);
         return entityManager;

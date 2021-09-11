@@ -62,7 +62,7 @@ public class OracleConfig {
         LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
         entityManager.setJtaDataSource(oracleDataSource);
         entityManager.setJpaVendorAdapter(oracleJpaVendorAdapter());
-        entityManager.setPackagesToScan("cn.lianxf.cloud.jpa.entity.oracle");
+        entityManager.setPackagesToScan("cn.lianxf.cloud.jpa.cn.lianxf.cloud.entity.oracle");
         entityManager.setPersistenceUnitName("oraclePersistenceUnit");
         entityManager.setJpaPropertyMap(properties);
         return entityManager;

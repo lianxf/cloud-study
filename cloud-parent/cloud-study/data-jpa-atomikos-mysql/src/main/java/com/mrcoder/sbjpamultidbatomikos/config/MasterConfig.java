@@ -64,7 +64,7 @@ public class MasterConfig {
         LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
         entityManager.setJtaDataSource(masterDataSource());
         entityManager.setJpaVendorAdapter(jpaVendorAdapter);
-        entityManager.setPackagesToScan("com.mrcoder.sbjpamultidbatomikos.entity.master");
+        entityManager.setPackagesToScan("com.mrcoder.sbjpamultidbatomikos.cn.lianxf.cloud.entity.master");
         entityManager.setPersistenceUnitName("masterPersistenceUnit");
         entityManager.setJpaPropertyMap(properties);
         return entityManager;

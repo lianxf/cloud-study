@@ -1,17 +1,20 @@
 server:
-  port: 8080
+    port: 8888
 spring:
-  application:
-    name: boot-mybatis-plus
-  datasource:
-    driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:helowin
-    username: root
-    password: root
-
+    application:
+        name: arthas-boot
+    datasource:
+        driver-class-name: oracle.jdbc.OracleDriver
+        url: jdbc:oracle:thin:@localhost:1521:helowin
+        password: root
+        username: root
 mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
   configuration:
-    map-underscore-to-camel-case: true
-    auto-mapping-behavior: full
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath*:mapper/**/*Mapper.xml
+      map-underscore-to-camel-case: true
+  type-aliases-package: cn.lianxf.cloud.entity
+logging:
+  file:
+    name: /opt/logs/arthas-boot/output-error.log
+  level:
+    cn.lianxf.cloud.mapper: debug

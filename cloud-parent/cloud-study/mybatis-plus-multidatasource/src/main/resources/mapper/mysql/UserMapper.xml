@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.lianxf.cloud.mapper.mysql.UserMapper">
 
-    <resultMap id="BaseResultMap" type="cn.lianxf.cloud.entity.mysql.User">
+    <resultMap id="BaseResultMap" type="cn.lianxf.cloud.cn.lianxf.cloud.entity.mysql.User">
         <id column="ID" property="id" />
         <result column="NAME" property="name" />
         <result column="AGE" property="age" />

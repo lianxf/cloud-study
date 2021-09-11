@@ -3,7 +3,7 @@
 <mapper namespace="cn.lianxf.cloud.mapper.oracle.SoftProductMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="cn.lianxf.cloud.entity.oracle.SoftProduct">
+    <resultMap id="BaseResultMap" type="cn.lianxf.cloud.cn.lianxf.cloud.entity.oracle.SoftProduct">
         <id column="ID" property="id" />
         <result column="FLOW_INST_ID" property="flowInstId" />
         <result column="MATERIAL_CODE" property="materialCode" />

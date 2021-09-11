@@ -1,0 +1,34 @@
+server:
+    port: 8888
+spring:
+    application:
+        name: arthas-boot
+    datasource:
+        driver-class-name: oracle.jdbc.OracleDriver
+        url: jdbc:oracle:thin:@localhost:1521:helowin
+        password: root
+        username: root
+    #thymelea模板配置
+    thymeleaf:
+        prefix: classpath:/template/
+        suffix: .html
+        mode: HTML5
+        encoding: UTF-8
+    #热部署文件，页面不产生缓存，及时更新
+        cache: false
+    resources:
+        chain:
+            strategy:
+                content:
+                      enabled: true
+                      paths: /**
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  configuration:
+      map-underscore-to-camel-case: true
+  type-aliases-package: cn.lianxf.cloud.entity
+logging:
+  file:
+    name: /opt/logs/arthas-boot/output-error.log
+  level:
+    cn.lianxf.cloud.mapper: debug

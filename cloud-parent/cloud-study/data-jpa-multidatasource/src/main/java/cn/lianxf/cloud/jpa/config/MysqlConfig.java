@@ -56,7 +56,7 @@ public class MysqlConfig {
                 .dataSource(dataSource)
                 .properties(getVendorProperties())
                 // 设置实体类所在位置
-                .packages("cn.lianxf.cloud.jpa.entity.mysql")
+                .packages("cn.lianxf.cloud.jpa.cn.lianxf.cloud.entity.mysql")
                 .persistenceUnit("mysqlPersistenceUnit")
                 .build();
     }

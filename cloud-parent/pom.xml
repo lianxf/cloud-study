@@ -33,6 +33,7 @@
         <druid.version>1.2.6</druid.version>
         <feign-okhttp3.version>11.6</feign-okhttp3.version>
         <guava.version>30.1.1-jre</guava.version>
+        <prometheus.version>1.7.3</prometheus.version>
     </properties>
 
     <dependencies>
@@ -128,6 +129,12 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus -->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+                <version>${prometheus.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
