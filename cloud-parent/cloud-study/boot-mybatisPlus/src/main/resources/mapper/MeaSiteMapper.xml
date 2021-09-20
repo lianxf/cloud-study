@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lianxf.cloud.mapper.MeaSiteMapper">
+
+
+    <select id="tree" resultType="cn.lianxf.cloud.entity.SiteTree">
+        select t.ID, t.PARENT_ID, t.NAME, t.PATH, t.PRIORITY, t.MODIFIED_TIME, level
+        from MEA_SITE t
+        start with t.PARENT_ID is null
+        connect by prior t.ID = t.PARENT_ID
+        order siblings by t.PRIORITY desc, t.MODIFIED_TIME desc
+    </select>
+</mapper>

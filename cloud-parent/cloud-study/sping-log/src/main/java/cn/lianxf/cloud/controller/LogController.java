@@ -1,5 +1,7 @@
 package cn.lianxf.cloud.controller;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.lianxf.cloud.controller.vo.LogFileVO;
@@ -17,7 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -46,7 +50,8 @@ public class LogController {
                     LogFileVO log = new LogFileVO();
                     log.setFileName(file.getName());
                     log.setFilePath(file.getAbsolutePath());
-                    log.setFileSize(String.valueOf(file.length()));
+                    log.setFileSize(FileUtil.readableFileSize(file));
+                    log.setUpdateTime(DateUtil.format(new Date(file.lastModified()), DateFormat.getInstance()));
                     logList.add(log);
                 }
             }

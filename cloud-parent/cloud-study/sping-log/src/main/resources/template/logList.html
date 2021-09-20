@@ -24,6 +24,7 @@
                 <td th:text="${log.fileName}"></td>
                 <td th:text="${log.filePath}"></td>
                 <td th:text="${log.fileSize}"></td>
+                <td th:text="${log.updateTime}"></td>
                 <td >
                     <span><a th:href = "'download?filePath=' + ${log.filePath}">下载</a></span>
                     <span><a th:href = "'cat?filePath=' + ${log.filePath}">打开</a></span>

@@ -32,6 +32,7 @@
         <module>prometheus_grafana</module>
         <module>spring-validate</module>
         <module>sping-log</module>
+        <module>boot-netty-wesocket</module>
     </modules>
 
     <dependencies>
